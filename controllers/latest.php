@@ -22,6 +22,8 @@ class org_midgardproject_news_controllers_latest
             throw new midgardmvc_exception_notfound("Category {$args['category']} not found");
         }
         $qb->add_constraint('category', '=', $args['category']);
+
+        midgardmvc_core::get_instance()->i18n->set_translation_domain('org_midgardproject_news');
     }
 
     private function check_types(midgard_query_builder $qb, array $args)
@@ -63,7 +65,7 @@ class org_midgardproject_news_controllers_latest
         $dummy = new org_midgardproject_news_article();
         $this->data['items']->set_placeholder($dummy);
 
-        $this->data['title'] = 'Latest news';
+        $this->data['title'] = midgardmvc_core::get_instance()->i18n->get('title_latest_news', 'org_midgardproject_news');
         midgardmvc_core::get_instance()->head->set_title($this->data['title']);
     }
 }
